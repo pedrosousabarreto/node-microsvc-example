@@ -1,6 +1,6 @@
 {
   "name": "node-microsvc-example",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "NodeJS microservice framework example",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

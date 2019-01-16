@@ -4,7 +4,7 @@
 "use strict";
 
 
-import {ServiceParams, ServiceParam, PARAM_TYPES, ServiceFeatureFlag} from "node_microsvc_lib";
+import {ServiceParams, ServiceParam, PARAM_TYPES, ServiceFeatureFlag} from "node-microsvc-lib";
 
 let params = new ServiceParams();
 

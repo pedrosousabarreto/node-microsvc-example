@@ -5,7 +5,7 @@
 
 const start_time = Date.now();
 
-import {Microservice, ConsoleLogger} from "node_microsvc_lib";
+import {Microservice, ConsoleLogger} from "node-microsvc-lib";
 
 // factories/modules
 import {RequestLogger} from "./factories/request_logger";

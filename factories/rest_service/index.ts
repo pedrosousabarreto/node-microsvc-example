@@ -7,7 +7,7 @@ import * as express from "express";
 import * as body_parser from "body-parser";
 import * as assert from "assert";
 
-import {ILogger,IDiFactory, ServiceConfigs} from "node_microsvc_lib";
+import {ILogger,IDiFactory, ServiceConfigs} from "node-microsvc-lib";
 
 
 const my_path = "/test";

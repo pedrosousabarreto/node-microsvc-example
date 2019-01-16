@@ -4,7 +4,7 @@
 "use strict";
 
 
-import {ServiceConfigs, AppBaseConfigs} from "node_microsvc_lib";
+import {ServiceConfigs, AppBaseConfigs} from "node-microsvc-lib";
 import svc_params = require("./params");
 
 let app_base_confs = new AppBaseConfigs();

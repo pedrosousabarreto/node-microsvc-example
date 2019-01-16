@@ -4,7 +4,7 @@
 "use strict";
 import * as express from "express";
 
-import {ILogger,IDiFactory, ServiceConfigs} from "node_microsvc_lib";
+import {ILogger,IDiFactory, ServiceConfigs} from "node-microsvc-lib";
 
 
 

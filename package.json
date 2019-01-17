@@ -1,6 +1,6 @@
 {
   "name": "node-microsvc-example",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "NodeJS microservice framework example",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,6 +14,7 @@
   "dependencies": {
     "async": "^2.6.1",
     "express": "^4.16.4",
+    "kafka-node": "^4.0.0",
     "node-microsvc-lib": "github:pedrosousabarreto/node-microsvc-lib",
     "underscore": "^1.9.1",
     "uuid": "^3.3.2"

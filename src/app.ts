@@ -8,9 +8,10 @@ const start_time = Date.now();
 import {Microservice, ConsoleLogger} from "node-microsvc-lib";
 
 // factories/modules
-import {RequestLogger} from "./factories/request_logger/index";
-import {HealthCheck} from "./factories/health_check/index";
-import {TestRestCtrl} from "./factories/rest_service/index";
+import {RequestLogger} from "./factories/request_logger";
+import {HealthCheck} from "./factories/health_check";
+import {TestRestCtrl} from "./factories/rest_service";
+import {TestEventHandler} from "./factories/event_handler";
 
 
 // configs
@@ -27,6 +28,7 @@ app.register_dependency("logger", logger);
 app.register_factory("request_logger", RequestLogger);
 app.register_factory("test_rest_ctrl", TestRestCtrl);
 app.register_factory("health_check", HealthCheck);
+app.register_factory("test_event_handler", TestEventHandler);
 
 
 process.on("uncaughtException", (err:Error)=>{

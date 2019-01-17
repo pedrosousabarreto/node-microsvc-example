@@ -1,19 +1,34 @@
-FROM node:10.15.0 as builder
+FROM node:10.15.0 as base
 
-WORKDIR /usr/src/app
+WORKDIR /app
+
+#--------------------
+
+FROM base AS dependencies
+
 COPY package*.json ./
-
 RUN npm install
-COPY . .
+
+#--------------------
+FROM dependencies AS build
+WORKDIR /app
+
+COPY src /app/src
 
 RUN npm run tsc
 
-FROM node:10.15.0-alpine as app
+#--------------------
 
-## Copy built node modules and binaries without including the toolchain
-WORKDIR /usr/src/app
+FROM node:10.15.0-alpine as release
+RUN apk add --no-cache git
 
-COPY --from=builder /usr/src/app/* ./
+WORKDIR /app
+
+COPY --from=dependencies /app/package*.json ./
+
+RUN npm install --only=production
+
+COPY --from=build /app/src ./src
 
 EXPOSE 3000
 CMD [ "npm", "run", "prod" ]

@@ -7,8 +7,6 @@ import * as express from "express";
 
 import {ILogger,IDiFactory, ServiceConfigs} from "node-microsvc-lib";
 
-import {TestRestCtrl} from "../rest_service";
-
 
 export class HealthCheck implements IDiFactory {
 	private _name = "HealthCheck";

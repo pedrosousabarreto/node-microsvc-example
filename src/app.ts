@@ -8,9 +8,9 @@ const start_time = Date.now();
 import {Microservice, ConsoleLogger} from "node-microsvc-lib";
 
 // factories/modules
-import {RequestLogger} from "./factories/request_logger";
-import {HealthCheck} from "./factories/health_check";
-import {TestRestCtrl} from "./factories/rest_service";
+import {RequestLogger} from "./factories/request_logger/index";
+import {HealthCheck} from "./factories/health_check/index";
+import {TestRestCtrl} from "./factories/rest_service/index";
 
 
 // configs

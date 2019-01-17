@@ -1,13 +1,13 @@
 {
   "name": "node-microsvc-example",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "NodeJS microservice framework example",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev --respawn --transpileOnly ./app.ts",
-    "start": "tsc && node ./app.js",
-    "prod": "NODE_ENV=production node ./app.js",
-    "tsc": "tsc"
+    "dev": "ts-node-dev --respawn --transpileOnly ./src/app.ts",
+    "start": "tsc -p src && node ./src/app.js",
+    "prod": "NODE_ENV=production node ./src/app.js",
+    "tsc": "tsc -p src"
   },
   "author": "Pedro Barreto <pedro.barreto@bynder.com>",
   "license": "ISC",
@@ -15,11 +15,11 @@
     "async": "^2.6.1",
     "express": "^4.16.4",
     "node-microsvc-lib": "github:pedrosousabarreto/node-microsvc-lib",
-    "typescript": "^3.2.2",
     "underscore": "^1.9.1",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "typescript": "^3.2.2",
     "@types/async": "^2.0.50",
     "@types/express": "^4.16.0",
     "@types/underscore": "^1.8.9",

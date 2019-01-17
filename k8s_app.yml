@@ -1,0 +1,70 @@
+apiVersion: v1
+items:
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    generation: 1
+    labels:
+      run: example
+    name: example
+    namespace: default
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        run: example
+    strategy:
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 1
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          run: example
+      spec:
+        containers:
+        - image: node-microsvc-example:latest
+          imagePullPolicy: Never
+          name: example
+          ports:
+          - containerPort: 3000
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      run: example
+    name: example
+    namespace: default
+  spec:
+    clusterIP: 10.106.69.148
+    externalTrafficPolicy: Cluster
+    ports:
+    - nodePort: 32009
+      port: 3000
+      protocol: TCP
+      targetPort: 3000
+    selector:
+      run: example
+    sessionAffinity: None
+    type: NodePort
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

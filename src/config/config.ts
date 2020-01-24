@@ -1,35 +1,35 @@
 /**
- * Created by pedro.barreto@bynder.com on 15/Jan/2019.
+ * Created by pedrosousabarreto@gmail.com on 15/Jan/2019.
  */
 "use strict";
 
-
 import {ServiceConfigs, AppBaseConfigs} from "node-microsvc-lib";
-import svc_params = require("./params");
+import {IConfigsProvider} from "node-microsvc-lib";
+import {HashicorpVaultProvider} from "node-microsvc-lib";
 
 let app_base_confs = new AppBaseConfigs();
 app_base_confs.env = process.env.NODE_ENV || 'dev_local';
-app_base_confs.solution_name = "BynderAPI_V2";
-app_base_confs.app_name = "node_http_service_skel";
+app_base_confs.solution_name = "ExampleAPI_V2";
+app_base_confs.app_name = "node_http_service_example";
 app_base_confs.app_version = "0.0.1";
 app_base_confs.app_api_prefix = "";
+
 app_base_confs.app_api_version = "1";
 
-/*
-	If LOCAL_OVERRIDES env var is set then call the correspondent file passing
- 	along AppBaseConfigs and ServiceParams for it to modify accordingly
+// First load the required params with their default values
+import svc_params = require("./params");
 
- 	file name is config.app_base_confs.env.js - app_base_confs.env is set from NODE_ENV or dev_local if no NODE_ENV is set
-*/
+// check if overrides is enabled and an override file exists and if so, apply it
+svc_params.override_from_env_file(app_base_confs);
 
-if(process.env.hasOwnProperty("LOCAL_OVERRIDES")){
-	try{
-		let filename = "./config." + app_base_confs.env + ".js";
-		require(filename)(app_base_confs, svc_params);
-	} catch(e){
-		console.log("error on LOCAL_OVERRIDES");
-	}
+// custom config loader
+let conf_provider: IConfigsProvider;
+if(process.env.hasOwnProperty("VAULT_URL") && process.env.hasOwnProperty("VAULT_TOKEN")) {
+	const vault_url = process.env["VAULT_URL"] || ""; // "http://localhost:8200";
+	const vault_token = process.env["VAULT_TOKEN"] || ""; // "myroot";
+	conf_provider = new HashicorpVaultProvider(app_base_confs.solution_name, app_base_confs.app_name, vault_url, vault_token);
 }
 
 // exports a ServiceConfigs instance
-export = new ServiceConfigs(svc_params, null, app_base_confs);
+//@ts-ignore
+export = new ServiceConfigs(svc_params, conf_provider, app_base_confs);

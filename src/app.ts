@@ -1,5 +1,5 @@
 /**
- * Created by pedro.barreto@bynder.com on 15/Jan/2019.
+ * Created by pedrosousabarreto@gmail.com on 15/Jan/2019.
  */
 "use strict";
 
@@ -12,6 +12,7 @@ import {RequestLogger} from "./factories/request_logger";
 import {HealthCheck} from "./factories/health_check";
 import {TestRestCtrl} from "./factories/rest_service";
 import {TestEventHandler} from "./factories/event_handler";
+import {Metrics} from "./factories/metrics";
 
 
 // configs
@@ -19,13 +20,14 @@ import configs = require("./config/config");
 
 const logger = new ConsoleLogger();
 
-// create microservice app
+// create microservice appv
 const app = new Microservice(configs, logger);
 
 
 app.register_dependency("logger", logger);
 
-app.register_factory("request_logger", RequestLogger);
+// app.register_factory("request_logger"config.dev.ts, RequestLogger);
+app.register_factory("metrics", Metrics);
 app.register_factory("test_rest_ctrl", TestRestCtrl);
 app.register_factory("health_check", HealthCheck);
 app.register_factory("test_event_handler", TestEventHandler);

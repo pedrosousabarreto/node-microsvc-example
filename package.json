@@ -1,30 +1,36 @@
 {
   "name": "node-microsvc-example",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "NodeJS microservice framework example",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev --respawn --transpileOnly ./src/app.ts",
-    "start": "tsc -p src && node ./src/app.js",
-    "prod": "NODE_ENV=production node ./src/app.js",
-    "tsc": "tsc -p src"
+    "dev": "ts-node-dev --respawn --transpileOnly src/app.ts",
+    "start": "tsc -p src && node src/app.js",
+    "prod": "node src/app.js",
+    "build": "tsc"
   },
-  "author": "Pedro Barreto <pedro.barreto@bynder.com>",
-  "license": "ISC",
+  "main": "lib/app.js",
+  "author": "Pedro Barreto <pedrosousabarreto@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pedrosousabarreto/node-microsvc-example.git"
+  },
   "dependencies": {
-    "async": "^2.6.1",
-    "express": "^4.16.4",
-    "kafka-node": "^4.0.0",
-    "node-microsvc-lib": "github:pedrosousabarreto/node-microsvc-lib",
-    "underscore": "^1.9.1",
-    "uuid": "^3.3.2"
+    "async": "^2.6.3",
+    "express": "^4.17.1",
+    "kafka-node": "^4.1.3",
+    "node-microsvc-lib": "^0.1.29",
+    "prom-client": "^11.5.3",
+    "underscore": "^1.9.2",
+    "uuid": "^3.4.0"
   },
   "devDependencies": {
-    "typescript": "^3.2.2",
-    "@types/async": "^2.0.50",
-    "@types/express": "^4.16.0",
-    "@types/underscore": "^1.8.9",
-    "@types/uuid": "^3.4.4",
-    "ts-node-dev": "^1.0.0-pre.32"
+    "@types/async": "^2.4.2",
+    "@types/express": "^4.17.2",
+    "@types/underscore": "^1.9.4",
+    "@types/uuid": "^3.4.6",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.7.5"
   }
 }

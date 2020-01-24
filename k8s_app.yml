@@ -35,6 +35,9 @@ items:
           ports:
           - containerPort: 3000
             protocol: TCP
+#          env:
+#          - name: NODE_ENV
+#            value: "office"
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
@@ -47,23 +50,23 @@ items:
   kind: Service
   metadata:
     labels:
-      run: example
+      app: example
     name: example
     namespace: default
   spec:
-    clusterIP: 10.106.69.148
-    externalTrafficPolicy: Cluster
-    ports:
-    - nodePort: 32009
-      port: 3000
-      protocol: TCP
-      targetPort: 3000
     selector:
       run: example
     sessionAffinity: None
     type: NodePort
-  status:
-    loadBalancer: {}
+    ports:
+    - port: 3000
+      name: http
+#    - name: http
+#      port: 3000
+#      targetPort: 80
+#      protocol: TCP
+#  status:
+#    loadBalancer: {}
 kind: List
 metadata:
   resourceVersion: ""

@@ -1,8 +1,9 @@
 /**
- * Created by pedro.barreto@bynder.com on 15/Jan/2019.
+ * Created by pedrosousabarreto@gmail.com on 15/Jan/2019.
  */
 "use strict";
 
+import * as url from "url";
 import * as express from "express";
 import * as body_parser from "body-parser";
 import * as assert from "assert";
@@ -12,8 +13,7 @@ import {ILogger,IDiFactory, ServiceConfigs} from "node-microsvc-lib";
 
 const my_path = "/test";
 
-export class
-TestRestCtrl implements IDiFactory {
+export class TestRestCtrl implements IDiFactory {
 	private _name = "TestRestCtrl";
 	private _configs: ServiceConfigs;
 	private _express_app: express.Application;
@@ -78,7 +78,7 @@ TestRestCtrl implements IDiFactory {
 			this._handler_get_root.bind(this)
 		);
 
-		this._express_app.use(this._configs.app_base_url + my_path, router);
+		this._express_app.use(url.resolve(this._configs.app_base_url, my_path), router);
 
 		this._logger.info(`routes injected at ${this._configs.app_base_url + my_path}`);
 

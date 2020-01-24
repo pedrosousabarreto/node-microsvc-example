@@ -1,5 +1,5 @@
 /**
- * Created by pedro.barreto@bynder.com on 17/Jan/2019.
+ * Created by pedrosousabarreto@gmail.com on 17/Jan/2019.
  */
 "use strict";
 
@@ -34,8 +34,6 @@ export class TestEventHandler implements IDiFactory {
 	init(callback: (err?: Error) => void) {
 		let kafka_conn_string = this._configs.get_param_value("kafka_conn_string");
 		let kafka_events_topic = this._configs.get_param_value("kafka_events_topic");
-
-		this._logger.debug(`starting kafka consumer with kafka_conn_string: ${kafka_conn_string} and kafka_events_topic: ${kafka_events_topic}`);
 
 		this._kafka_consumer = new KafkaConsumer(
 			kafka_conn_string,

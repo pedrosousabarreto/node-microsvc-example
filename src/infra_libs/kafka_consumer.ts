@@ -1,5 +1,5 @@
 /**
- * Created by pedro.barreto@bynder.com on 17/Jan/2019.
+ * Created by pedrosousabarreto@gmail.com on 17/Jan/2019.
  */
 "use strict";
 
@@ -10,6 +10,7 @@ import * as async from 'async';
 import {ConsoleLogger, ILogger} from "node-microsvc-lib";
 
 const MAX_PROCESSING_TIMEOUT = 30*1000;
+
 
 export class KafkaConsumer extends EventEmitter {
 	// private _client: kafka.Client;
@@ -48,17 +49,21 @@ export class KafkaConsumer extends EventEmitter {
 			return this._env_name + "_" + topic_name;
 		});
 
+
 		this._from_offset = from_offlet;
 
 		if(logger && typeof (<any>logger).child === "function"){
 			this._logger = (<any>logger).child({
-				class: "KafkaConsumer2",
+				class: "KafkaConsumer",
 				kafka_topics: this._topics.join(","),
 				kafka_groupname: this._consumer_group_name
 			});
 		}else{
 			this._logger = new ConsoleLogger();
 		}
+
+
+		this._logger.debug(`starting kafka consumer with kafka_conn_string: ${kafka_con_string} and kafka_events_topic: ${this._topics.join(',')}`);
 
 		this._logger.info("instance created");
 	}
@@ -107,7 +112,6 @@ export class KafkaConsumer extends EventEmitter {
 			connectOnReady: true, //this._connect_on_ready,
 			// paused: true
 		};
-		this._logger.info(`options: \n${JSON.stringify(consumer_group_options)}`);
 
 		this._consumer_group = new kafka.ConsumerGroup(
 			consumer_group_options as kafka.ConsumerGroupOptions, this._topics
@@ -173,7 +177,7 @@ export class KafkaConsumer extends EventEmitter {
 	// }
 
 	message_handler(message:any) {
-		// console.log("message received - topic: '%s' offset: '%d' partition: '%d'", this._get_log_prefix(), message.topic, message.offset, message.partition);
+		console.log(`message received - topic: ${message.topic} offset: ${message.offset} partition: ${message.partition}`);
 		// let msg = _.clone(message);
 
 		try {
